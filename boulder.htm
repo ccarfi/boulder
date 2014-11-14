@@ -36,6 +36,15 @@
               myPath.fillColor = colorArray[currentColor];
             }
 
+            // Draw a polygon
+            drawPolygon = function(sides) {
+                myPath.remove();
+                myPath = new paper.Path.RegularPolygon(zeroRef,sides+1,100);
+                myPath.fillColor = colorArray[currentColor];
+                myPath.lastSegment.remove();  // pull out a segment to make it asymmetric
+            }
+
+
             // keyboard commands
             tool.onKeyDown = function(event) {
                 switch (event.key) {
@@ -51,50 +60,35 @@
                     case '_':               // change scale
                         myPath.scale(0.7);
                         break;
-                    case 'right':               // change shape
+                    case 'right':           // torque shape
                         myPath.shear(.05)
                         break;
-                    case 'left':               // change shape
+                    case 'left':            // torque shape
                         myPath.skew(-3);
                         break;
-                    case 'space':               // change color
+                    case 'space':           // change color
                         nextColor();
                        break;
-                    case 'down':               // change rotate
+                    case 'down':            // change rotation
                         myPath.rotate(2);
                         break;
-                    case 'up':               // change rotate
+                    case 'up':              // change rotation
                         myPath.rotate(-2);
                         break;
                     case '5':               // change polygon
-                        myPath.remove();
-                        myPath = new paper.Path.RegularPolygon(zeroRef,6,100);
-                        myPath.fillColor = colorArray[currentColor];
-                        myPath.lastSegment.remove();
+                        drawPolygon(5);
                         break;           
                     case '6':               // change polygon
-                        myPath.remove();
-                        myPath = new paper.Path.RegularPolygon(zeroRef,7,100);
-                        myPath.fillColor = colorArray[currentColor];
-                        myPath.lastSegment.remove();
+                        drawPolygon(6);
                         break;           
                     case '7':               // change polygon
-                        myPath.remove();
-                        myPath = new paper.Path.RegularPolygon(zeroRef,8,100);
-                        myPath.fillColor = colorArray[currentColor];
-                        myPath.lastSegment.remove();
+                        drawPolygon(7);
                         break;           
                     case '8':               // change polygon
-                        myPath.remove();
-                        myPath = new paper.Path.RegularPolygon(zeroRef,9,100);
-                        myPath.fillColor = colorArray[currentColor];
-                        myPath.lastSegment.remove();
+                        drawPolygon(8);
                         break;           
                     case '9':               // change polygon
-                        myPath.remove();
-                        myPath = new paper.Path.RegularPolygon(zeroRef,10,100);
-                        myPath.fillColor = colorArray[currentColor];
-                        myPath.lastSegment.remove();
+                        drawPolygon(9);
                         break;           
                     }
                 }
@@ -102,10 +96,7 @@
             tool.onMouseDown = function(event) {
                 // create a hexaboulder and drop it at the mouseclick
                 zeroRef = event.point;
-                myPath.remove();  // remove existing polygon, if one exists
-                myPath = new paper.Path.RegularPolygon(event.point,7,100);
-                myPath.fillColor = colorArray[currentColor];
-                myPath.lastSegment.remove();
+                drawPolygon(6);
             }
         }
     </script>
