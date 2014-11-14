@@ -6,7 +6,7 @@ You can try it live at: [http://baconspa.com/boulder/](http://baconspa.com/bould
 
 The commands are:
 - +: make the polygon larger
-- -: make the polycon smaller
+- -: make the polygon smaller
 - space: cycle through the available colors
 - left/right: skew the polycon
 - up/down: rotate the polygon
