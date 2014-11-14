@@ -102,7 +102,7 @@
             tool.onMouseDown = function(event) {
                 // create a hexaboulder and drop it at the mouseclick
                 zeroRef = event.point;
-                myPath.remove();
+                myPath.remove();  // remove existing polygon, if one exists
                 myPath = new paper.Path.RegularPolygon(event.point,7,100);
                 myPath.fillColor = colorArray[currentColor];
                 myPath.lastSegment.remove();
