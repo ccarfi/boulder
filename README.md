@@ -2,6 +2,8 @@
 
 This project was created as part of a hack day. The project generates asymmetric polygons in various colors.
 
+You can try it live at: [http://baconspa.com/boulder/](http://baconspa.com/boulder/)
+
 The commands are:
 - +: make the polygon larger
 - -: make the polycon smaller
