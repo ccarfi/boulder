@@ -12,22 +12,21 @@
             // Create an empty project and a view for the canvas:
             paper.setup(canvas);
 
+            // Set initial conditions and variables
             var myPath = new paper.Path();
             var colorArray =  ["#77c043","#f2812e","#00a55e","#000000","#999999","#b3602f","#5b79b1","#fedc45"];
             var maxColor = 8;
             var currentColor = 0;
             var color = new paper.Color(colorArray[currentColor]);
+            var tool = new paper.Tool();
+            var zeroRef = new paper.Point();
             myPath.strokeColor = 'white';
             myPath.fillColor = color;
 
-
-            // Draw the view now:
+            // Draw the view
             paper.view.draw();
-
-            var tool = new paper.Tool();
-            var zeroRef = new paper.Point();
                         
-            // Cycle the colors
+            // Function to cycle the colors
             nextColor = function() {
               currentColor++;
               if (currentColor == maxColor) {
@@ -36,7 +35,7 @@
               myPath.fillColor = colorArray[currentColor];
             }
 
-            // Draw a polygon
+            // Function to draw a polygon
             drawPolygon = function(sides) {
                 myPath.remove();
                 myPath = new paper.Path.RegularPolygon(zeroRef,sides+1,100);
@@ -92,7 +91,8 @@
                         break;           
                     }
                 }
-                        
+                    
+            // The bit that gets things going on the mouseclick            
             tool.onMouseDown = function(event) {
                 // create a hexaboulder and drop it at the mouseclick
                 zeroRef = event.point;
