@@ -1,1 +1,117 @@
-hello
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Load the Paper.js library -->
+<script type="text/javascript" src="paper-full.js"></script>
+<!-- Define inlined JavaScript -->
+    <script type="text/javascript">
+        // Only executed our code once the DOM is ready.
+        window.onload = function() {
+            // Get a reference to the canvas object
+            var canvas = document.getElementById('myCanvas');
+            // Create an empty project and a view for the canvas:
+            paper.setup(canvas);
+
+            var myPath = new paper.Path();
+            var colorArray =  ["#77c043","#f2812e","#00a55e","#000000","#999999","#b3602f","#5b79b1","#fedc45"];
+            var maxColor = 8;
+            var currentColor = 0;
+            var color = new paper.Color(colorArray[currentColor]);
+            myPath.strokeColor = 'white';
+            myPath.fillColor = color;
+
+
+            // Draw the view now:
+            paper.view.draw();
+
+            var tool = new paper.Tool();
+            var zeroRef = new paper.Point();
+                        
+            // Cycle the colors
+            nextColor = function() {
+              currentColor++;
+              if (currentColor == maxColor) {
+                  currentColor = 0;
+              }
+              myPath.fillColor = colorArray[currentColor];
+            }
+
+            // keyboard commands
+            tool.onKeyDown = function(event) {
+                switch (event.key) {
+                    case '+':               // change scale
+                        myPath.scale(1.3);
+                        break;
+                    case '=':               // change scale
+                        myPath.scale(1.3);
+                        break;
+                    case '-':               // change scale
+                        myPath.scale(0.7);
+                        break;
+                    case '_':               // change scale
+                        myPath.scale(0.7);
+                        break;
+                    case 'right':               // change shape
+                        myPath.shear(.05)
+                        break;
+                    case 'left':               // change shape
+                        myPath.skew(-3);
+                        break;
+                    case 'space':               // change color
+                        nextColor();
+                       break;
+                    case 'down':               // change rotate
+                        myPath.rotate(2);
+                        break;
+                    case 'up':               // change rotate
+                        myPath.rotate(-2);
+                        break;
+                    case '5':               // change polygon
+                        myPath.remove();
+                        myPath = new paper.Path.RegularPolygon(zeroRef,6,100);
+                        myPath.fillColor = colorArray[currentColor];
+                        myPath.lastSegment.remove();
+                        break;           
+                    case '6':               // change polygon
+                        myPath.remove();
+                        myPath = new paper.Path.RegularPolygon(zeroRef,7,100);
+                        myPath.fillColor = colorArray[currentColor];
+                        myPath.lastSegment.remove();
+                        break;           
+                    case '7':               // change polygon
+                        myPath.remove();
+                        myPath = new paper.Path.RegularPolygon(zeroRef,8,100);
+                        myPath.fillColor = colorArray[currentColor];
+                        myPath.lastSegment.remove();
+                        break;           
+                    case '8':               // change polygon
+                        myPath.remove();
+                        myPath = new paper.Path.RegularPolygon(zeroRef,9,100);
+                        myPath.fillColor = colorArray[currentColor];
+                        myPath.lastSegment.remove();
+                        break;           
+                    case '9':               // change polygon
+                        myPath.remove();
+                        myPath = new paper.Path.RegularPolygon(zeroRef,10,100);
+                        myPath.fillColor = colorArray[currentColor];
+                        myPath.lastSegment.remove();
+                        break;           
+                    }
+                }
+                        
+            tool.onMouseDown = function(event) {
+                // create a hexaboulder and drop it at the mouseclick
+                zeroRef = event.point;
+                myPath.remove();
+                myPath = new paper.Path.RegularPolygon(event.point,7,100);
+                myPath.fillColor = colorArray[currentColor];
+                myPath.lastSegment.remove();
+            }
+        }
+    </script>
+</head>
+<body>
+CLICK IN THE MIDDLE OF SCREEN TO START | space: change color | up/down: rotate | left/right: skew | +/- : embiggen/shrink | 5-9 : change shape <br>
+<canvas id="myCanvas" resize></canvas>
+</body>
+</html>
